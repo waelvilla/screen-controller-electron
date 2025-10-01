@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Screen Takeover</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 24px; }
+      .container { max-width: 800px; margin: 0 auto; }
+      h1 { font-size: 24px; }
+      code { background: #f5f5f5; padding: 2px 6px; border-radius: 4px; }
+      button { padding: 8px 12px; font-size: 14px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Electron App</h1>
+      <p>Renderer is running. API ping: <span id="ping"></span></p>
+      <button id="screenshotBtn">Take Screenshot</button>
+      <p id="status"></p>
+    </div>
+    <script src="renderer.js"></script>
+  </body>
+  </html>
+
+
