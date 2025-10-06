@@ -15,6 +15,15 @@ const api = Object.freeze({
       return { ok: false, error: message };
     }
   },
+  captureScreenshotPng: async (): Promise<{ ok: true; dataUrl: string } | { ok: false; error: string }> => {
+    try {
+      const result = await ipcRenderer.invoke('capture-screenshot-png');
+      return result as { ok: true; dataUrl: string } | { ok: false; error: string };
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      return { ok: false, error: message };
+    }
+  },
 });
 
 contextBridge.exposeInMainWorld('api', api);

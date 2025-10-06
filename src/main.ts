@@ -66,6 +66,19 @@ ipcMain.handle('take-screenshot', async () => {
   }
 });
 
+ipcMain.handle('capture-screenshot-png', async () => {
+  try {
+    const pngBuffer = await capturePrimaryDisplayPng();
+    const base64 = pngBuffer.toString('base64');
+    const dataUrl = `data:image/png;base64,${base64}`;
+    return { ok: true as const, dataUrl };
+  } catch (error: unknown) {
+    console.error(error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return { ok: false as const, error: message };
+  }
+});
+
 app.whenReady().then(() => {
   createMainWindow();
 

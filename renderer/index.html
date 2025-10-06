@@ -18,7 +18,20 @@
       <p>Renderer is running. API ping: <span id="ping"></span></p>
       <button id="screenshotBtn">Take Screenshot</button>
       <p id="status"></p>
+      <hr />
+      <div>
+        <button id="ocrBtn">Capture + Read Top-Left Text</button>
+        <p><strong>OCR Text:</strong> <span id="ocrText"></span></p>
+        <canvas id="cropCanvas" width="0" height="0" style="display:none"></canvas>
+      </div>
+      <hr />
+      <div>
+        <button id="ocrFromImageBtn">Pick Image + Read Top-Left</button>
+        <input id="imageFile" type="file" accept="image/*" style="display:none" />
+        <p><strong>From Image OCR:</strong> <span id="ocrTextFromImage"></span></p>
+      </div>
     </div>
+    <script src="https://unpkg.com/tesseract.js@5.1.0/dist/tesseract.min.js"></script>
     <script src="renderer.js"></script>
   </body>
   </html>
