@@ -24,6 +24,15 @@ const api = Object.freeze({
       return { ok: false, error: message };
     }
   },
+  openUrl: async (url: string): Promise<{ ok: true } | { ok: false; error: string }> => {
+    try {
+      const result = await ipcRenderer.invoke('open-url', url);
+      return result as { ok: true } | { ok: false; error: string };
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      return { ok: false, error: message };
+    }
+  },
 });
 
 contextBridge.exposeInMainWorld('api', api);

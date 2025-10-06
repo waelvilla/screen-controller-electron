@@ -29,7 +29,7 @@ function createMainWindow(): void {
   mainWindow.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
 
   if (!app.isPackaged) {
-    mainWindow.webContents.openDevTools({ mode: 'detach' });
+    // mainWindow.webContents.openDevTools({ mode: 'detach' });
   }
 }
 
@@ -74,6 +74,19 @@ ipcMain.handle('capture-screenshot-png', async () => {
     return { ok: true as const, dataUrl };
   } catch (error: unknown) {
     console.error(error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return { ok: false as const, error: message };
+  }
+});
+
+ipcMain.handle('open-url', async (_event, url: string) => {
+  if (!mainWindow) {
+    return { ok: false as const, error: 'Main window is not available' };
+  }
+  try {
+    await mainWindow.loadURL(url);
+    return { ok: true as const };
+  } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     return { ok: false as const, error: message };
   }

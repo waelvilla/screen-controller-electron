@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const ocrFromImageBtn = document.getElementById('ocrFromImageBtn');
   const imageFileInput = document.getElementById('imageFile');
   const ocrTextFromImage = document.getElementById('ocrTextFromImage');
+  const openGoogleBtn = document.getElementById('openGoogleBtn');
   if (btn) {
     btn.addEventListener('click', async () => {
       if (!window.api || !window.api.takeScreenshot) {
@@ -59,6 +60,22 @@ window.addEventListener('DOMContentLoaded', () => {
     if (ocrText) ocrText.textContent = 'Reading...';
     const { data } = await Tesseract.recognize(canvas, 'eng+deu', { logger: () => {} });
     if (ocrText) ocrText.textContent = data.text.trim();
+  }
+
+  if (openGoogleBtn) {
+    openGoogleBtn.addEventListener('click', async () => {
+      if (!window.api || !window.api.openUrl) {
+        if (status) status.textContent = 'API not available.';
+        return;
+      }
+      if (status) status.textContent = 'Opening VAA...';
+      try {
+        const result = await window.api.openUrl('http://localhost:5173');
+        if (!result.ok && status) status.textContent = `Error: ${result.error}`;
+      } catch (e) {
+        if (status) status.textContent = 'Unexpected error.';
+      }
+    });
   }
 
   if (ocrBtn) {
