@@ -204,9 +204,9 @@
   optionalDependencies:
     global-agent "^3.0.0"
 
-"@electron/node-gyp@https://github.com/electron/node-gyp#06b29aafb7708acef8b3669835c8a7857ebc92d2":
+"@electron/node-gyp@git+https://github.com/electron/node-gyp.git#06b29aafb7708acef8b3669835c8a7857ebc92d2":
   version "10.2.0-electron.1"
-  resolved "https://github.com/electron/node-gyp#06b29aafb7708acef8b3669835c8a7857ebc92d2"
+  resolved "git+https://github.com/electron/node-gyp.git#06b29aafb7708acef8b3669835c8a7857ebc92d2"
   dependencies:
     env-paths "^2.2.0"
     exponential-backoff "^3.1.1"
@@ -1006,6 +1006,11 @@ eastasianwidth@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/eastasianwidth/-/eastasianwidth-0.2.0.tgz#696ce2ec0aa0e6ea93a397ffcf24aa7840c827cb"
   integrity sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==
+
+electron-screenshot@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/electron-screenshot/-/electron-screenshot-1.0.5.tgz#8cd46c4eb3d86b0401b0408228bdce033c535369"
+  integrity sha512-nTLZZ8urMraLwL0KYb5dz2o76cRPx+6WBQ0sOujqqfcUe1k/alj0UoLPmQpFs8VuIccF4K7ZNpeK95h0ob8p6Q==
 
 electron@^38.2.0:
   version "38.2.0"
@@ -1844,13 +1849,6 @@ minizlib@^2.1.1, minizlib@^2.1.2:
     minipass "^3.0.0"
     yallist "^4.0.0"
 
-mkdirp@^0.5.1:
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.6.tgz#7def03d2432dcae4ba1d611445c48396062255f6"
-  integrity sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==
-  dependencies:
-    minimist "^1.2.6"
-
 mkdirp@^1.0.3, mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
@@ -2274,13 +2272,6 @@ rimraf@^3.0.2:
   dependencies:
     glob "^7.1.3"
 
-rimraf@~2.6.2:
-  version "2.6.3"
-  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
-  integrity sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==
-  dependencies:
-    glob "^7.1.3"
-
 roarr@^2.15.3:
   version "2.15.4"
   resolved "https://registry.yarnpkg.com/roarr/-/roarr-2.15.4.tgz#f5fe795b7b838ccfe35dc608e0282b9eba2e7afd"
@@ -2309,13 +2300,6 @@ safe-buffer@~5.2.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
-
-screenshot-desktop@^1.15.2:
-  version "1.15.2"
-  resolved "https://registry.yarnpkg.com/screenshot-desktop/-/screenshot-desktop-1.15.2.tgz#21489e1b4ac779659460cf65dc8db6f84023f30d"
-  integrity sha512-/uf8xhq3n/Ym7oOKT4XF1uLAYP9njABB9zMw7kkOaDVr8XOO1HBQsNJXT8lUvzD26Uj8IYkwQX46UMZG4Y/dIQ==
-  dependencies:
-    temp "^0.9.4"
 
 semver-compare@^1.0.0:
   version "1.0.0"
@@ -2545,14 +2529,6 @@ tar@^6.0.5, tar@^6.1.11, tar@^6.2.1:
     minizlib "^2.1.1"
     mkdirp "^1.0.3"
     yallist "^4.0.0"
-
-temp@^0.9.4:
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/temp/-/temp-0.9.4.tgz#cd20a8580cb63635d0e4e9d4bd989d44286e7620"
-  integrity sha512-yYrrsWnrXMcdsnu/7YMYAofM1ktpL5By7vZhf15CrXijWWrEYZks5AXBudalfSWJLlnen/QUJUB5aoB0kqZUGA==
-  dependencies:
-    mkdirp "^0.5.1"
-    rimraf "~2.6.2"
 
 tmp@^0.0.33:
   version "0.0.33"

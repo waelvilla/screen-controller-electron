@@ -1,10 +1,17 @@
-import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  desktopCapturer,
+  ipcMain,
+  screen,
+} from 'electron';
 import path from 'path';
-import fs from 'fs';
-import screenshot from 'screenshot-desktop';
+import { promises as fs } from 'fs';
+
+let mainWindow: BrowserWindow | null = null;
 
 function createMainWindow(): void {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
     webPreferences: {
@@ -12,6 +19,10 @@ function createMainWindow(): void {
       contextIsolation: true,
       nodeIntegration: false,
     },
+  });
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
   });
 
   // When compiled, __dirname is `dist`. Renderer lives one level up.
@@ -22,17 +33,36 @@ function createMainWindow(): void {
   }
 }
 
-// Handle screenshot capture and saving
-ipcMain.handle('capture-screenshot', async () => {
+async function capturePrimaryDisplayPng(): Promise<Buffer> {
+  const primaryDisplay = screen.getPrimaryDisplay();
+  const sources = await desktopCapturer.getSources({
+    types: ['screen'],
+    thumbnailSize: primaryDisplay.size,
+  });
+
+  const primarySource =
+    sources.find((source) => source.display_id === String(primaryDisplay.id)) ?? sources[0];
+
+  if (!primarySource) {
+    throw new Error('No screen sources found');
+  }
+
+  return primarySource.thumbnail.toPNG();
+}
+
+ipcMain.handle('take-screenshot', async () => {
   try {
-    const pngBuffer = await screenshot({ format: 'png' });
+    const pngBuffer = await capturePrimaryDisplayPng();
     const desktopPath = app.getPath('desktop');
-    const filePath = path.join(desktopPath, `screenshot-${Date.now()}.png`);
-    fs.writeFileSync(filePath, pngBuffer);
-    return { ok: true, filePath };
+    const outputDir = path.join(desktopPath, 'Screen Takeover');
+    await fs.mkdir(outputDir, { recursive: true });
+    const filePath = path.join(outputDir, `screenshot-${Date.now()}.png`);
+    await fs.writeFile(filePath, pngBuffer);
+    return { ok: true as const, filePath };
   } catch (error: unknown) {
+    console.error(error);
     const message = error instanceof Error ? error.message : 'Unknown error';
-    return { ok: false, error: message };
+    return { ok: false as const, error: message };
   }
 });
 
